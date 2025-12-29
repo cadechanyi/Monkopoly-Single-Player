@@ -1,2 +1,3 @@
 # Monopoly-Single-Player
-Single player monopoly game built in python
+Single Player version of Monkopoly: A Desktop Monopoly clone built in Python using tkinter.
+Run from objects.py or download monkopoly.exe or run it directly
