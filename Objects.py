@@ -1,6 +1,7 @@
 from Labels import *
 import time
 import random
+import sys
 from ai_logic import *
 class game:
     def __init__(self, endgame, turn, playernumber, cycletrue, dice1list, dice2list, doubles, tradeto, openwindows):
@@ -249,30 +250,30 @@ class boardplaces:
 #class of board places which number two coordinates, property name, type, and the label image that pops up
 
 boardplaceslist = [boardplaces(0, 640, 715, 'GO', 'go', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(1, 588, 715, 'Caledon', 'property', 'property', caledonimg, caledontradelb, 60, 0, 2, 10, 30, 90, 160, 250, 50, 0, 1, False, caledonsmalllb, False),
+                   boardplaces(1, 588, 715, 'Caledon', 'property', 'property', caledonimg, caledontradelb, 60, 'no', 2, 10, 30, 90, 160, 250, 50, 0, 1, False, caledonsmalllb, False),
                    boardplaces(2, 528, 715, 'Baboon Bin', 'chest', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(3, 474, 715, 'Milton','property', 'property', miltonimg, miltontradelb, 60, 1, 4, 20, 60, 180, 320, 450, 50, 0, 1, False, miltonsmalllb, False),
+                   boardplaces(3, 474, 715, 'Milton','property', 'property', miltonimg, miltontradelb, 60, 'no', 4, 20, 60, 180, 320, 450, 50, 0, 1, False, miltonsmalllb, False),
                    boardplaces(4, 416, 715, 'Mentor School Fees 200', 'tax', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(5, 358, 715, 'Wayne Bus', 'property', 'bus', waynebusimg, waynebustradelb, 200, 2, 25, 50, 100, 200, 'no', 'no', 'no', 0, 10, False, waynebussmalllb, False),
-                   boardplaces(6, 301, 715, 'Angola', 'property', 'property', angolaimg, angolatradelb, 100, 2, 6, 30, 90, 270, 400, 550, 50, 0, 2, False, angolasmalllb, False),
+                   boardplaces(5, 358, 715, 'Wayne Bus', 'property', 'bus', waynebusimg, waynebustradelb, 200, 'no', 25, 50, 100, 200, 'no', 'no', 'no', 0, 10, False, waynebussmalllb, False),
+                   boardplaces(6, 301, 715, 'Angola', 'property', 'property', angolaimg, angolatradelb, 100, 'no', 6, 30, 90, 270, 400, 550, 50, 0, 2, False, angolasmalllb, False),
                    boardplaces(7, 248, 715, 'Healthcare Hazard', 'chest', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
                    boardplaces(8, 186, 715, 'Somalia', 'property', 'property', somaliaimg, somaliatradelb, 100, 'no', 6, 30, 90, 270, 400, 550, 50, 0, 2, False, somaliasmalllb, False), #to demonstrate the new debt function changed base rent to 1600
                    boardplaces(9, 129, 715, 'Chad', 'property', 'property', chadimg, chadtradelb, 120, 'no', 8, 40, 100, 300, 450, 600, 50, 0, 2, False, chadsmalllb, False),
                    boardplaces(10, 5, 715, 'Jail', 'jail', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(11, 5, 590, 'Scarborough', 'property', 'property', scarboroughimg, scarboroughtradelb, 140, 0, 10, 50, 150, 450, 625, 750, 100, 0, 3, False, scarboroughsmalllb, False),
+                   boardplaces(11, 5, 590, 'Scarborough', 'property', 'property', scarboroughimg, scarboroughtradelb, 140, 'no', 10, 50, 150, 450, 625, 750, 100, 0, 3, False, scarboroughsmalllb, False),
                    boardplaces(12, 5, 532, 'Pepsi Company', 'property', 'company', pepsicompanyimg, pepsicompanytradelb, 150, 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 9, False, pepsicompanysmalllb, False),
-                   boardplaces(13, 5, 475, 'Markham', 'property', 'property', markhamimg, markhamtradelb, 140, 0, 10, 50, 150, 450, 625, 750, 100, 0, 3, False, markhamsmalllb, False),
-                   boardplaces(14, 5, 417, 'Primary Campus', 'property', 'property', primarycampusimg, primarycampustradelb, 160, 1, 12, 60, 180, 500, 700, 900, 100, 0, 3, False, primarycampussmalllb, False),
+                   boardplaces(13, 5, 475, 'Markham', 'property', 'property', markhamimg, markhamtradelb, 140, 'no', 10, 50, 150, 450, 625, 750, 100, 0, 3, False, markhamsmalllb, False),
+                   boardplaces(14, 5, 417, 'Primary Campus', 'property', 'property', primarycampusimg, primarycampustradelb, 160, 'no', 12, 60, 180, 500, 700, 900, 100, 0, 3, False, primarycampussmalllb, False),
                    boardplaces(15, 5, 359, 'Jeff Bus', 'property', 'bus', jeffbusimg, jeffbustradelb, 200, 'no', 25, 50, 100, 200, 'no', 'no', 'no', 0, 10, False, jeffbussmalllb, False),
                    boardplaces(16, 5, 302, 'GCP', 'property', 'property', gcpimg, gcptradelb, 180, 'no', 14, 70, 200, 550, 750, 950, 100, 0, 4, False, gcpsmalllb, False),
                    boardplaces(17, 5, 246, 'Baboon Bin', 'chest', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
                    boardplaces(18, 5, 186, 'Mentor Lobby', 'property', 'property', mentorlobbyimg, mentorlobbytradelb, 180, 'no', 14, 70, 200, 550, 750, 950, 100, 0, 4, False, mentorlobbysmalllb, False),
                    boardplaces(19, 5, 129, 'Bhav Barn', 'property', 'property', bhavbarnimg, bhavbarntradelb, 200, 'no', 16, 80, 220, 600, 800, 1000, 100, 0, 4, False, bhavbarnsmalllb, False),
                    boardplaces(20, 5, 5, 'Lunch Break', 'lunch', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(21, 136, 5, 'Mentor Gym', 'property', 'property', mentorgymimg, mentorgymtradelb, 220, 0, 18, 90, 250, 700, 875, 1050, 150, 0, 5, False, mentorgymsmalllb, False),
+                   boardplaces(21, 136, 5, 'Mentor Gym', 'property', 'property', mentorgymimg, mentorgymtradelb, 220, 'no', 18, 90, 250, 700, 875, 1050, 150, 0, 5, False, mentorgymsmalllb, False),
                    boardplaces(22, 192, 5, 'Healthcare hazard', 'chest', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(23, 250, 5, 'North Korea', 'property', 'property', northkoreaimg, northkoreatradelb, 220, 0, 18, 90, 250, 700, 875, 1050, 150, 0, 5, False, northkoreasmalllb, False),
-                   boardplaces(24, 308, 5 ,'mentor office', 'property', 'property', mentorofficeimg, mentorofficetradelb, 240, 1, 20, 100, 300, 750, 925, 1100, 150, 0, 5, False, mentorofficesmalllb, False),
+                   boardplaces(23, 250, 5, 'North Korea', 'property', 'property', northkoreaimg, northkoreatradelb, 220, 'no', 18, 90, 250, 700, 875, 1050, 150, 0, 5, False, northkoreasmalllb, False),
+                   boardplaces(24, 308, 5 ,'mentor office', 'property', 'property', mentorofficeimg, mentorofficetradelb, 240, 'no', 20, 100, 300, 750, 925, 1100, 150, 0, 5, False, mentorofficesmalllb, False),
                    boardplaces(25, 365, 5, 'Smith Bus', 'property', 'bus', smithbusimg, smithbustradelb, 200, 'no', 25, 50, 100, 200, 'no', 'no', 'no', 0, 10, False, smithbussmalllb, False),
                    boardplaces(26, 423, 5, 'Yehia Pyramid', 'property', 'property', yehiapyramidimg, yehiapyramidtradelb, 260, 'no', 22, 110, 330, 800, 975, 1150, 150, 0, 6, False, yehiapyramidsmalllb, False),
                    boardplaces(27, 481, 5, 'Egypt', 'property', 'property', egyptimg, egypttradelb, 260, 'no', 22, 110, 330, 800, 975, 1150, 150, 0, 6, False, egyptsmalllb, False),
@@ -285,9 +286,9 @@ boardplaceslist = [boardplaces(0, 640, 715, 'GO', 'go', 'no', 'no', 'no', 'no', 
                    boardplaces(34, 710, 304, 'Oakville', 'property', 'property', oakvilleimg, oakvilletradelb, 320, 'no', 28, 150, 450, 1000, 1200, 1400, 200, 0, 7, False, oakvillesmalllb, False),
                    boardplaces(35, 710, 362, 'Dan Bus', 'property', 'bus', danbusimg, danbustradelb, 200, 'no', 25, 50, 100, 200, 'no', 'no', 'no', 0, 10, False, danbussmalllb, False),
                    boardplaces(36, 710, 422, 'Healthcare hazard', 'chest', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(37, 710, 478, 'Crystal Cove', 'property', 'property', crystalcoveimg, crystalcovetradelb, 350, 0, 35, 175, 500, 1100, 1300, 1500, 200, 0, 8, False, crystalcovesmalllb, False),
+                   boardplaces(37, 710, 478, 'Crystal Cove', 'property', 'property', crystalcoveimg, crystalcovetradelb, 350, 'no', 35, 175, 500, 1100, 1300, 1500, 200, 0, 8, False, crystalcovesmalllb, False),
                    boardplaces(38, 710, 534, 'field trip 100', 'tax', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 0, 'no', False, 'no', False),
-                   boardplaces(39, 710, 593, 'jungle of the monkeys', 'property', 'property', jungleofmonkeysimg, jungleofmonkeystradelb, 400, 1, 50, 200, 600, 1400, 1700, 2000, 200, 0, 8, False, jungleofmonkeyssmalllb, False)]
+                   boardplaces(39, 710, 593, 'jungle of the monkeys', 'property', 'property', jungleofmonkeysimg, jungleofmonkeystradelb, 400, 'no', 50, 200, 600, 1400, 1700, 2000, 200, 0, 8, False, jungleofmonkeyssmalllb, False)]
 #list of all boardplaces with there numbers coordinates, name, etc.
 class chest:
     def __init__(self, lbtext, movecom, moneycom):
@@ -366,11 +367,11 @@ class player:
                 self.worth_dict[item] = ((boardplaceslist[item].cost/10)*((2**owned_in_set)**owned_in_set))
             else:
                 self.worth_dict[item] = ((boardplaceslist[item].cost/10)*(2**owned_in_set))
-        print(self.worth_dict, self.number)
+        #print(self.worth_dict, self.number)
 
     def ai_property_buy_check(self, property_number):
         buy_value = self.worth_dict[property_number] * (self.money - boardplaceslist[property_number].cost)
-        print(self.worth_dict[property_number])
+        #print(self.worth_dict[property_number])
         if buy_value >= 2200:
             return True
         else:
@@ -438,8 +439,8 @@ class player:
             else:
                 worth_to += 1 * ((trade_to_property.cost/10)*(2**owned_in_set))
 
-        print(worth_from, 'worthfrom')
-        print(worth_to, 'worthto')
+        #print(worth_from, 'worthfrom')
+        #print(worth_to, 'worthto')
         if worth_from >= worth_to:
             return True
         else:
@@ -1038,7 +1039,7 @@ def endgame():
     close_trade_window()
 
     def yes_endgame():
-        exit()
+        sys.exit()
     def no_endgame():
         end_game_gui.destroy()
         gameboard.next_turn_check()
@@ -1085,7 +1086,7 @@ for player in playerlist:
 
 a = playerlist[0].ai_property_buy_check(3)
 b = playerlist[0].ai_property_buy_check(9)
-print(a, b)
+#print(a, b)
 
 print('----RULES----')
 print('No more than 3 windows can be open at a time')
