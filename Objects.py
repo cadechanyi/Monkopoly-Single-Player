@@ -2,7 +2,7 @@ from Labels import *
 import time
 import random
 import sys
-from ai_logic import *
+
 class game:
     def __init__(self, endgame, turn, playernumber, cycletrue, dice1list, dice2list, doubles, tradeto, openwindows):
         self.endgame = endgame
