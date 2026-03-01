@@ -26,10 +26,17 @@ images_dir = Path(__file__).resolve().parent.parent.parent / "Images"
 if images_dir.exists():
     app.mount("/images", StaticFiles(directory=str(images_dir)), name="images")
 
-# In production, serve the frontend build
-frontend_dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
-if frontend_dist.exists():
-    app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")
+# In production, serve the frontend build.
+# Support both the monorepo layout (web/frontend/dist) and the Docker image layout (/app/frontend/dist).
+backend_root = Path(__file__).resolve().parent
+frontend_candidates = [
+    backend_root.parent / "frontend" / "dist",  # repo layout: web/frontend/dist
+    backend_root / "frontend" / "dist",        # Docker layout: /app/frontend/dist
+]
+for frontend_dist in frontend_candidates:
+    if frontend_dist.exists():
+        app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")
+        break
 
 
 @app.get("/api/health")
